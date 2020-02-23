@@ -1,0 +1,5 @@
+<odoo>
+	<data>
+       <act_window id="download_poster" name="Download poster" res_model="downloadwizard.download" src_model="bds.poster" view_mode="form" multi="True" target="new" key2="client_action_multi"  />
+	</data>
+</odoo>

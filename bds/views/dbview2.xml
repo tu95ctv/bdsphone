@@ -1,0 +1,70 @@
+<odoo>
+<data>
+		<record id="bds_bdsview4_form" model="ir.ui.view">
+            <field name="name">bds_bdsview_form</field>
+            <field name="model">bds.bdsview4</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="id" />
+                     		<field name="tieu_de" />
+                     		<field name="html" />
+                     		
+                        </group>
+                        
+                        <group>
+                            <field name="khachxembds_ids" >
+                            <tree editable="bottom">
+                            	<field name="poster_id"></field>
+                            	<field name="user_id"></field>
+                            </tree>
+                            </field>
+                        </group>
+                        
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="bds_bdsview4_list" model="ir.ui.view">
+            <field name="name">bds_bdsview_list</field>
+            <field name="model">bds.bdsview4</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id" />
+                     <field name="tieu_de" />
+                     <field name="html" />
+                     <field name="cpas" />
+                     <field name="full_count" />
+                     <field name="khach_count" />
+                     <field name="test_field" />
+                </tree>
+            </field>
+        </record>
+        
+        
+        <record id="bds_bdsview4_search" model="ir.ui.view">
+            <field name="name">bds_bdsview_list</field>
+            <field name="model">bds.bdsview4</field>
+            <field name="arch" type="xml">
+                <search>
+                	  <filter name="cpas" string="cpas be hon 1" domain="[('cpas','&lt;=',1)]" />
+                	  <filter name="full_count" string="full_count be hon 1" domain="[('full_count','&lt;=',1)]" />
+                	                     
+                	
+                </search>
+            </field>
+        </record>
+        
+        
+        
+        
+        <record model="ir.actions.act_window" id="bds_bdsview4_action">
+            <field name="name">bds_bdsview</field>
+            <field name="res_model">bds.bdsview4</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+<menuitem name="bds view" id="bds_bdsview4_menu" parent="bds_icon" action="bds_bdsview4_action" />
+</data>
+</odoo>

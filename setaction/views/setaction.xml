@@ -1,0 +1,50 @@
+<odoo>
+  <data>
+  
+  <!-- 
+   <record model="ir.ui.view" id="setactionsingle_form">
+         <field name="name">setaction.setactionsingle.form</field>
+         <field name="model">setaction.setactionsingle</field>
+         <field name="arch" type="xml">
+            <form string=" Form">
+            	<sheet>
+            	<group>
+            		<field name="name" invisible="1"></field>
+            		<field name="context_val"/>
+            		<field name="notice"/>
+            	</group>
+            	</sheet>
+            <footer>
+            </footer>
+            </form>
+            </field>
+            </record>
+             -->
+            
+            
+            
+       <record model="ir.ui.view" id="setaction_form">
+         <field name="name">setaction.setaction.form</field>
+         <field name="model">setaction.setaction</field>
+         <field name="inherit_id" ref=""></field>
+         <field name="arch" type="xml">
+            	<form string=" Form">
+            	<sheet>
+            	<group>
+            		<field name="name" invisible="1"></field>
+            		<field name="context_val"/>
+            		<field name="active_model"/>
+            		<field name="choosed_object_qty"/>
+            		<field name="affected_object_qty"/>
+            	</group>
+            	</sheet>
+            <footer>
+            </footer>
+            </form>
+            </field>
+            </record>
+            
+            
+            
+  </data>
+</odoo>

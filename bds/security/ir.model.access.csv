@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bds_bds,bds.bds,model_bds_bds,base.group_user,1,1,1,1
+access_bds_poster,bds.poster,model_bds_poster,base.group_user,1,1,1,1
+access_bds_khachxembds,bds.khachxembds,model_bds_khachxembds,,1,1,1,1

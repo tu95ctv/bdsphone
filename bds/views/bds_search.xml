@@ -1,0 +1,94 @@
+<odoo>
+	<data>
+		<record id="bds_search" model="ir.ui.view">
+            <field name="name">sale.order.list.select</field>
+            <field name="model">bds.bds</field>
+            <field name="arch" type="xml">
+                <search string="bds search">
+                
+                    <field name="name" />
+                    <field name="title" />
+                    <field name="gia"  string="Tạo cách đây bn phút" filter_domain="[('create_date','&gt;', (datetime.datetime.now() -  datetime.timedelta(hours=7,minutes=self)).strftime('%Y-%%m-%%d %%H:%%M:%%S'))]"   />
+                     <field name="gia"  string="giá bé hơn" filter_domain="[('gia','&lt;',self)]"/>
+                     <field name="gia"  string="giá  lớn hơn" filter_domain="[('gia','&gt;',self)]"/>
+                      <field name="count_post_all_site"  string="count_post_all_site  bé hơn" filter_domain="[('count_post_all_site','&lt;',self)]"/>
+                   	<field name="len_same_address_bds_ids" />
+                      
+                    <field  name="len_same_address_bds_ids" string="len_same_address_bds_ids lon hon"  filter_domain="[ ('len_same_address_bds_ids','&gt;=',self)]"/>
+                    <field name="ket_luan_cc_or_mg" />
+                    <field name="du_doan_cc_or_mg" />
+                    <field name="link" />
+                    <field name="html" />
+                    <field name="html_khong_dau" />
+                    <field name="siteleech_id" />
+                    <field name="quan_id" />
+                    <field name="poster_id" />
+                    <field name= "muc_gia" />
+                    <field name= "trich_dia_chi" />
+                    <field name= "url_id" />
+                    <!-- 
+                    <field  name="ti_le_don_gia" string="ti_le_don_gia_be_hon"  filter_domain="[('ti_le_don_gia','&lt;',self)]"/>
+                      <field  name="ti_le_don_gia" string="ti_le_don_gia_lon_hon"  filter_domain="[('ti_le_don_gia', '&gt;',self)]"/>
+                    <field name="muc_ti_le_don_gia" />
+                    <field name= "muc_don_gia" />
+                    <field name="public_datetime" />
+                    <filter  name="not_p_15_tan_binh" string="Not phuong 15"  domain="[('quan_id.name', 'ilike', 'Tân Bình'),('html','not ilike','phạm văn bạch'),('html','not ilike','phạm văn bạch'),('html','not ilike','phường 15')]"/>
+                     -->
+                    <!-- <field name="quan_id" filter_domain="[('quan_id','=',self)]"/> -->
+                    <field name="quan_id_selection" filter_domain="[('quan_id','=',self)]"/>
+                    <field name="siteleech_id_selection" filter_domain="[('siteleech_id','=',self)]"/>
+                    <field  name="greater_day" string="số ngày đăng bé hơn"  filter_domain="[ ('public_datetime','&gt;=', ((context_today()-datetime.timedelta(days=self)).strftime('%Y-%m-%d'))) ]"/>
+                    <field  name="greater_day" string="số ngày  tạo bé hơn"  filter_domain="[ ('create_date','&gt;=', ((context_today()-datetime.timedelta(days=self)).strftime('%Y-%m-%d'))) ]"/>
+                    <field name="moi_gioi_hay_chinh_chu" />
+                  	<separator />
+                    <filter  name="quan_trung_tam" string="Quận Trung Tâm"  domain="[('quan_id.name', 'in',['Quận 1','Quận 3', 'Quận 5', 'Quận 10', 'Quận Tân Bình', 'Quận Tân Phú', 'Quận Phú Nhuận'])]"/>
+                    <separator />
+                    <filter  name="ti_le_don_gia_lon_hon_0" string="Tỉ lệ đơn giá lớn hơn 0"  domain="[('ti_le_don_gia', '&gt;', 0)]"/>
+                    <filter name="chinh_chu" string="Chính chủ" domain ="[('moi_gioi_hay_chinh_chu','=','chinh_chu')]"/>
+                    <separator />
+                     <filter name="create today" string="Tạo trong ngày" 
+                    domain="[('create_date','&lt;=', (context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')), ('create_date','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 17:00:00')))]" help="Pickings that are late on scheduled time" />
+                     <filter name="create today 2" string="Tạo trong ngày 2" 
+                    domain="[('create_date','&lt;=', (context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')), ('create_date','&gt;=', ((context_today()).strftime('%Y-%m-%d 00:00:00')))]" help="Pickings that are late on scheduled time" />
+                    <filter name="create yesterday" string="Tạo hôm qua" 
+                    domain="[('create_date','&lt;=', (context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')), ('create_date','&gt;=', ((context_today()-datetime.timedelta(days=2)).strftime('%Y-%m-%d 17:00:00')))]" help="Pickings that are late on scheduled time" />
+                    <separator />
+                  	<filter name="recently change" string="Tạo gần đây" domain="[('create_date','&gt;', (datetime.datetime.now() -  datetime.timedelta(hours=9,minutes=5)).strftime('%Y-%%m-%%d %%H:%%M:%%S'))]" help="Pickings that are late on scheduled time" />
+                     <separator />
+                    <filter name="co trich_dia_chi" domain ="[('trich_dia_chi','!=',False)]"></filter>
+                     <separator />
+                    <filter name="co anh" domain ="[('is_co_image','!=',False)]"></filter>
+                    <filter name="today" string="Đăng trong ngày" domain="[('public_datetime','&lt;=', (context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d 07:00:00')), ('public_datetime','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d 17:00:00')))]" help="Pickings that are late on scheduled time" />
+                    <filter name="oneday" string=" Đăng 1 ngày gần đây" domain="[('public_datetime','&lt;=', (context_today().strftime('%Y-%m-%d'))), ('public_datetime','&gt;=', ((context_today()-datetime.timedelta(days=1)).strftime('%Y-%m-%d')))]" help="Pickings that are late on scheduled time" />
+                    <filter name="threeday" string=" Đăng 3 ngày gần đây" domain="[('public_datetime','&lt;=', (context_today().strftime('%Y-%m-%d'))), ('public_datetime','&gt;=', ((context_today()-datetime.timedelta(days=3)).strftime('%Y-%m-%d')))]" help="Pickings that are late on scheduled time" />
+                    <filter name="thisweek" string="Đăng trong tuần" domain="[('public_datetime','&lt;=', (context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d')), ('public_datetime','&gt;=', ((context_today()-datetime.timedelta(days=7)).strftime('%Y-%m-%d')))]" help="Pickings that are late on scheduled time" />
+                    <filter name="is_read" string="not yet read" domain="[('is_read','=',False)]"></filter>
+                    <filter name="quan_tam" string="Quan tâm gần đây" domain="[('quan_tam','&lt;=', (context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d')), ('quan_tam','&gt;=', ((context_today()-datetime.timedelta(days=3)).strftime('%Y-%m-%d')))]" help="Pickings that are late on scheduled time" />
+                     <separator />
+                    <filter name="ngay_update_gia" string="co ngay_update_gia" domain="[('ngay_update_gia','!=',False)]" help="Pickings that are late on scheduled time" />
+                     <separator />
+                    <filter name="len_publicdate_ids" string="co len_publicdate_ids" domain="[('len_publicdate_ids','>',0)]" help="Pickings that are late on scheduled time" />
+                    <filter name="thismonth" string="This Month" domain="[('public_datetime','&lt;',(context_today()+ datetime.timedelta(days=1)).strftime('%Y-%m-%d')), ('public_datetime','&gt;=',time.strftime('%Y-%m-01'))]" help="Pickings that are late on scheduled time" />
+                    <filter name="thisyear" string="This Year" domain="[('public_datetime','&lt;',(context_today()+relativedelta(years=1)).strftime('%Y-%m-01')), ('public_datetime','&gt;=',time.strftime('%Y-%m-01'))]" help="Pickings that are late on scheduled time" />
+                    <filter name="co mtg" string="co mtg" domain="[('mtg','!=',False)]" help="Pickings that are late on scheduled time" />
+                    <separator />
+                    
+                    <group expand="0" string="Group By">
+                        <filter string="Quận" domain="[]" context="{'group_by':'quan_id'}" />
+                        <filter string="Poster" domain="[]" context="{'group_by':'poster_id'}" />
+                        <filter string="Mức đơn giá" domain="[]" context="{'group_by':'muc_don_gia'}" />
+                        <filter string="Tỉ lệ đơn giá" domain="[]" context="{'group_by':'ti_le_don_gia'}" />
+                        <filter string="Site" domain="[]" context="{'group_by':'siteleech_id'}" />
+                        <filter string="du_doan_cc_or_mg" domain="[]" context="{'group_by':'du_doan_cc_or_mg'}" />
+                        <filter string="ket_luan_cc_or_mg" domain="[]" context="{'group_by':'ket_luan_cc_or_mg'}" />
+                        <filter string="group_phuong" domain="[]" context="{'group_by':'phuong'}" />
+                        <filter string="group_quan" domain="[]" context="{'group_by':'quan'}" />
+                        <filter string="detail_du_doan_cc_or_mg" domain="[]" context="{'group_by':'detail_du_doan_cc_or_mg'}" />
+                        <filter string="group_url_id" domain="[]" context="{'group_by':'url_id'}" />
+                    </group>
+                </search>
+            </field>
+        </record>
+			
+	</data>
+</odoo>

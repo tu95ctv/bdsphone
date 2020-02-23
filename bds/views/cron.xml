@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data >
+      
+    <record id="bds_fetch_1" model="ir.cron">
+            <field name="name">bds fetch 1</field>
+            <field name="active">False</field> 
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+            <field eval="'cronfetch'" name="model"/>
+            <field ref="model_cronfetch" name="model_id"/>
+            <field name="state">code</field>
+            <field name="code">model.fetch_cron()</field>
+            </record>
+            
+            
+ <!-- Cron fetch -->
+        
+        <record id="cronfetch_form" model="ir.ui.view">
+            <field name="name">cronfetch_form</field>
+            <field name="model">cronfetch</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="id" />
+                     		<field name="fetch_ids" />
+                     		<field name="fetch_current_id" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="cronfetch_list" model="ir.ui.view">
+            <field name="name">cronfetch_list</field>
+            <field name="model">cronfetch</field>
+            <field name="arch" type="xml">
+                <tree>
+                     <field name="id" />
+                     <field name="fetch_ids" />
+                     <field name="fetch_current_id" />
+                </tree>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="cronfetch_action">
+            <field name="name">Cron fetch</field>
+            <field name="res_model">cronfetch</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- end cronfetch -->
+        
+        
+		<menuitem name="Cron Fetch" id="cron_fetch_menu" parent="bds_icon" action="cronfetch_action"  sequence="5"/>
+
+
+
+           
+   </data>
+</openerp>

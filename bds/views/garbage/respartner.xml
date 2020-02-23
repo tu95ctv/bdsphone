@@ -1,0 +1,5 @@
+<odoo>
+	<data>
+	        <menuitem name="Khách hàng" id="respartner" parent="bds_icon" action="base.action_partner_employee_form" />
+	</data>
+</odoo>

@@ -1,0 +1,97 @@
+<odoo>
+<data>
+	<!-- FETCH -->
+        <!-- FETCH -->
+        <record id="fetch_form" model="ir.ui.view">
+            <field name="name">fetch</field>
+            <field name="model">bds.fetch</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="fetch" string="fetch" type="object" class="btn-primary" />
+                        <button name="fetch_all_url" string="fetch_all_url" type="object" class="btn-primary" />
+                          <button name="test_something" string="test_something" type="object" class="btn-primary" />
+                         <!-- 
+                         <button name="fetch_lazada" string="fetch lazada" type="object" class="btn-primary" />
+                        <button name="test_mail" string="mail" type="object" class="btn-primary" />
+                        <button name="group_quan" string="group" type="object" class="btn-primary" />
+                        <button name="thread" string="thread" type="object" class="btn-primary" />
+                         -->
+                        <button name="set_0" string="set_0" type="object" class="btn-primary" />
+                        <button name="set_0_2" string="set_0_2" type="object" class="btn-primary" />
+                        <button name="trigger" string="trigger" type="object" class="btn-primary" />
+                        <button name="trigger2" string="trigger2" type="object" class="btn-primary" />
+                        <button name="trigger3" string="trigger3" type="object" class="btn-primary" />
+                        <button name="poster_trigger" string="poster_trigger" type="object" class="btn-primary" />
+                        <button name="quan_trigger" string="quan_trigger" type="object" class="btn-primary" />
+                        <button name="test_quan" string="test_quan" type="object" class="btn-primary" />
+                    </header>
+                    <group>
+                        <field name="url_ids" />
+                    </group>
+                    <group>
+                        <group>
+                       
+                         <!--  <field name="lazada_url"></field>
+                            <field name="input_text"></field>
+                            <field name="html_lazada_thread_gia"></field>
+                            <field name="html_lazada_thread"></field>
+                             -->    
+                            <field name="last_fetched_url_id" />
+                            <field name="name" />
+                    		<field name="ghi_chu" />
+                            <field name="update_field_of_existing_recorder" />
+                            <field name="set_leech_max_page" />
+                            <field name="is_for_first" />
+                            <field name="web_last_page_number" />
+                      <!--     <field name="page_begin" /> -->  
+                        <!--     <field name="set_page_end" /> -->
+                            <field name="set_number_of_page_once_fetch" />
+                        </group>
+                        <group>
+                            <field name="link_number" />
+                            <field name="update_link_number" />
+                            <field name="create_link_number" />
+                            <field name="existing_link_number" />
+                            <field name="note" />
+                            <field name="topic_id" />
+                        <!--    <field name="invisible_or_show_html_lazada"/>
+                             <field name="html_lazada" attrs="{'invisible':[('invisible_or_show_html_lazada','=',True)]}"></field> --> 
+                             
+                               <field name="test_url"></field>
+                         <field name="test_1"></field>
+                         <field name="test_html"></field>
+                        </group>
+                    </group>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="fetch_list">
+            <field name="name">bds list</field>
+            <field name="model">bds.fetch</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="id" />
+                    <field name="name" />
+                    <field name="ghi_chu" />
+                    <field name="url_ids" />
+                    <field name="link_number" />
+                    <field name="update_link_number" />
+                    <field name="create_link_number" />
+                    <field name="existing_link_number" />
+                    <field name="note" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="fetch_action">
+            <field name="name">fetch window</field>
+            <field name="res_model">bds.fetch</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem name="Fetch" id="fetch_menu" parent="bds_icon" action="bds.fetch_action"  sequence="3"/>
+        <!-- FETCH -->
+        
+        
+</data>
+</odoo>
