@@ -25,11 +25,12 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/data.xml',
+        'data/bdsdata.xml',
+        'data/bds_chotot_data.xml',
+        'data/laptopdata.xml',
         'views/viewbds.xml',
         'views/cron.xml',
         'views/fetch.xml',
-        'views/import_quan.xml',
         'views/bds_search.xml',
         'views/bds_form.xml',
         'views/bds_list.xml',
@@ -43,6 +44,9 @@
         'views/tproduct_detail.xml',
         'views/tproducts.xml',
         'views/url.xml',
+        'views/menu.xml',
+
+        
 #         'views/garbage/respartner.xml',
 
     ],

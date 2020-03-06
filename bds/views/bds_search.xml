@@ -9,9 +9,9 @@
                     <field name="name" />
                     <field name="title" />
                     <field name="gia"  string="Tạo cách đây bn phút" filter_domain="[('create_date','&gt;', (datetime.datetime.now() -  datetime.timedelta(hours=7,minutes=self)).strftime('%Y-%%m-%%d %%H:%%M:%%S'))]"   />
-                     <field name="gia"  string="giá bé hơn" filter_domain="[('gia','&lt;',self)]"/>
-                     <field name="gia"  string="giá  lớn hơn" filter_domain="[('gia','&gt;',self)]"/>
-                      <field name="count_post_all_site"  string="count_post_all_site  bé hơn" filter_domain="[('count_post_all_site','&lt;',self)]"/>
+                    <field name="gia"  string="giá bé hơn" filter_domain="[('gia','&lt;',self)]"/>
+                    <field name="gia"  string="giá  lớn hơn" filter_domain="[('gia','&gt;',self)]"/>
+                    <field name="count_post_all_site"  string="count_post_all_site  bé hơn" filter_domain="[('count_post_all_site','&lt;',self)]"/>
                    	<field name="len_same_address_bds_ids" />
                       
                     <field  name="len_same_address_bds_ids" string="len_same_address_bds_ids lon hon"  filter_domain="[ ('len_same_address_bds_ids','&gt;=',self)]"/>
@@ -26,6 +26,7 @@
                     <field name= "muc_gia" />
                     <field name= "trich_dia_chi" />
                     <field name= "url_id" />
+                    <field name= "cate" />
                     <!-- 
                     <field  name="ti_le_don_gia" string="ti_le_don_gia_be_hon"  filter_domain="[('ti_le_don_gia','&lt;',self)]"/>
                       <field  name="ti_le_don_gia" string="ti_le_don_gia_lon_hon"  filter_domain="[('ti_le_don_gia', '&gt;',self)]"/>
@@ -85,6 +86,7 @@
                         <filter string="group_quan" domain="[]" context="{'group_by':'quan'}" />
                         <filter string="detail_du_doan_cc_or_mg" domain="[]" context="{'group_by':'detail_du_doan_cc_or_mg'}" />
                         <filter string="group_url_id" domain="[]" context="{'group_by':'url_id'}" />
+                        <filter string="cate" domain="[]" context="{'group_by':'cate'}" />
                     </group>
                 </search>
             </field>

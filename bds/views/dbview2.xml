@@ -65,6 +65,5 @@
             <field name="view_mode">tree,form</field>
         </record>
 
-<menuitem name="bds view" id="bds_bdsview4_menu" parent="bds_icon" action="bds_bdsview4_action" />
 </data>
 </odoo>

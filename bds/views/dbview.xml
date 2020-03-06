@@ -1,7 +1,5 @@
 <odoo>
 	<data>
-	
-        
         <record id="bds_bdsview_form" model="ir.ui.view">
             <field name="name">bds_bdsview_form</field>
             <field name="model">bds.bdsview3</field>
@@ -73,7 +71,6 @@
             <field name="view_mode">tree,form</field>
         </record>
         
-        <menuitem name="bds view" id="bds_bdsview_menu" parent="bds_icon" action="bds_bdsview_action" />
 	
 	</data>
 </odoo>

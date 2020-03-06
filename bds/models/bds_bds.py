@@ -64,7 +64,13 @@ class Publicdate(models.Model):
         
         
         
-
+def skip_if_cate_not_bds(depend_func):
+    def wrapper(*args,**kargs):
+        self = args[0]
+        for r in self:
+            if r.cate ==u'bds':
+                depend_func(r)
+    return wrapper
 class bds(models.Model):
     _name = 'bds.bds'
     _order = "id desc"
@@ -192,7 +198,6 @@ class bds(models.Model):
     hem_truoc_nha = fields.Float(digit=(6,2))
     comment = fields.Char()
     ket_cau = fields.Selection([(u'Đất Trống',u'Đất Trống'),(u'Cấp 4',u'Cấp 4'),(u'1 Tầng',u'1 Tầng'),(u'2 Tầng',u'2 Tầng'),(u'3 Tầng',u'3 Tầng'),(u'4 Tầng',u'4 Tầng'),(u'5 Tầng',u'5 Tầng'),(u'lon hon 5 ',u'lon hon 5')])
-#     quan_id_selection = fields.Selection([])
     date_text = fields.Char()
     quan_id_selection = fields.Selection('get_quan_')
     trigger2 = fields.Boolean()
@@ -221,14 +226,7 @@ class bds(models.Model):
     public_datetime = fields.Datetime()
     first_public_datetime = fields.Datetime()
    
-#     count_chotot_post_of_poster = fields.Integer()
-#     count_bds_post_of_poster = fields.Integer()
-#     count_post_all_site = fields.Integer()
-#     max_trang_thai_lien_lac = fields.Char()
-#     du_doan_cc_or_mg = fields.Selection([('dd_mg','dd_mg'),('dd_dt','dd_dt'), ('dd_cc','dd_cc'), ('dd_kb', 'dd_kb')])
-#     ket_luan_cc_or_mg = fields.Selection([('dd_mg','dd_mg'),('dd_dt','dd_dt'), ('dd_cc','dd_cc'), ('dd_kb', 'dd_kb')])
-  
-    
+
     
     
     data = fields.Text()
@@ -244,6 +242,8 @@ class bds(models.Model):
     begin_gia = fields.Float()
     dia_chi_mat_tien = fields.Char()
     dia_chi_2 = fields.Char()
+    # mới thêm vào ngày 23/02
+    cate = fields.Selection([('bds','BDS'),('phone','Phone'),('laptop','Laptop')])
     def test(self):
         for r in self:
             same_address_bds_ids  = self.env['bds.bds'].search([('trich_dia_chi','=ilike',r.trich_dia_chi), ('id','!=',r.id)])
@@ -254,6 +254,8 @@ class bds(models.Model):
     def len_publicdate_ids_(self):
         for r in self:
             r.len_publicdate_ids = len(r.publicdate_ids)
+
+    @skip_if_cate_not_bds
     @api.depends('html')
     def html_replace_(self):
         for r in self:
@@ -262,6 +264,7 @@ class bds(models.Model):
             if r.trich_dia_chi:
                 html_replace = html_replace.replace(r.trich_dia_chi,'')
             r.html_replace = html_replace
+   
     @api.depends('gia')
     def gia_show_(self):
         for r in self:
@@ -272,6 +275,8 @@ class bds(models.Model):
     def is_co_image_(self):
         for r in self:
             r.is_co_image = bool(r.my_images_ids)
+
+    @skip_if_cate_not_bds
     @api.depends('html','trigger3')
     def mien_tiep_mg_(self):
         for r in self:
@@ -279,6 +284,9 @@ class bds(models.Model):
             if rs:
                 r.mien_tiep_mg = rs.group(0)
                 r.mtg = True
+
+    # bỏ skip_if_cate_not_bds thì bị lỗi         
+    @skip_if_cate_not_bds
     @api.depends('html', 'trigger2')
     def phuong_quan_(self):
         for r in self:
@@ -354,8 +362,8 @@ class bds(models.Model):
                 r.len_same_address_bds_ids = len(same_address_bds_ids)
                 r.same_address_bds_ids = [(6,0,same_address_bds_ids.mapped('id'))]
                 
-                
-    @api.depends('html','trigger2')
+    @skip_if_cate_not_bds            
+    @api.depends('html','trigger2','cate')
     def auto_ngang_doc_(self):
         for r in self:
 #             pt= '(\d{1,3}[m\.,]{0,1}\d{0,2}) {0,1}m{0,1} {0,1}x {0,1}(\d{1,3}[m\.,]{0,1}\d{0,2})'
@@ -383,8 +391,12 @@ class bds(models.Model):
                 choosed_area = r.area
             r.choosed_area = choosed_area
                 
-                
-        
+    # nếu không có decor bị lỗi
+    ''' rs = re.sub(pt, '', r.html, flags = re.I)
+  File "/usr/lib/python3.6/re.py", line 191, in sub
+    return _compile(pattern, flags).sub(repl, string, count)
+TypeError: expected string or bytes-like object'''      
+    @skip_if_cate_not_bds   
     @api.depends('html','trigger')
     def sub_html_(self):
         for r in self:
@@ -396,6 +408,7 @@ class bds(models.Model):
     
     
     hoahongsearch = fields.Char(compute ='hoahongsearch_',store=True)
+    @skip_if_cate_not_bds
     @api.depends('sub_html','trigger')
     def hoahongsearch_(self):
         for r in self:
@@ -406,6 +419,8 @@ class bds(models.Model):
                 
     
     search_remain_phone = fields.Char(compute ='search_remain_phone_',store=True)
+
+    @skip_if_cate_not_bds
     @api.depends('sub_html','trigger')
     def search_remain_phone_(self):
         for r in self:
@@ -417,6 +432,7 @@ class bds(models.Model):
             
             
     search_lien_he = fields.Char(compute ='search_lien_he_',store=True)
+    @skip_if_cate_not_bds
     @api.depends('html','trigger')
     def search_lien_he_(self):
         for r in self:
@@ -427,7 +443,7 @@ class bds(models.Model):
     
     
     
-    
+    @skip_if_cate_not_bds
     @api.depends('html','trigger')
     def mqc_(self):
         kss= ['quảng cáo','mqc','miễn qc','miễn tiếp báo']
@@ -441,31 +457,11 @@ class bds(models.Model):
             if is_match:
                 r.mqc = True
                     
-#     @api.depends('html','trigger')
-#     def mtg_(self):
-#         kss= ['mtg','mmg','miễn trung gian','miễn mô giới']
-#         for r in self:
-#             is_match = False
-#             for ks in kss:
-#                 rs = re.search(ks,r.html, re.I)
-#                 if rs:
-#                     is_match = True
-#                     break
-#             if is_match:
-#                 r.mtg = True
-#                 
-                
-                
-    
-                    
-                    
+
+    @skip_if_cate_not_bds               
     @api.depends('html','trigger')
     def dd_tin_cua_dau_tu_(self):
-#         pt= '(hoa hồng|huê hồng|hh|phí (môi giới|mg)).+?(\d[\.\d]{0,2}%|\d{2,3}\s{0,1}(triệu|tr))'
-#         for r in self:
-#             rs = re.search(pt, r.html,flags = re.I)
-#             if rs:
-#                 r.dd_tin_cua_dau_tu = True
+
         kss= ['hoa hồng','hh 1%', 'hh 0.5%','hh .{1,3}tr','1%','1 %','huê hồng','phí môi giới',]
         for r in self:
             is_match = False
@@ -478,54 +474,7 @@ class bds(models.Model):
                 r.dd_tin_cua_dau_tu = True
                     
                     
-                    
-                    
-                    
-                    
-    
-    
-    
 
-
-                
-                        
-                    
-                    
-    
-#     @api.depends('html','trigger')
-#     def trich_dia_chi_(self):
-#         for r in self:
-#             title = r.title
-#             html =  r.html
-#             if html:
-#                 dd_tin_cua_co = False
-#                 for rhtml in [title, html]:
-# #                     rs = re.search('(\d+\w{0,2}/(\d+\w{0,1}/*)+?)[\.() ]',rhtml)
-#                     rs = re.search('(\d+\w{0,2}(/\d+\w{0,1})+?)[\.() ]',rhtml)
-#                     if rs:
-#                         trich_dia_chi = rs.group(0)
-#                         trich_dia_chi = trich_dia_chi.replace('.','').replace(',','').replace('(','').replace(')','')
-#                         trich_dia_chi = trich_dia_chi.strip()
-#                         if trich_dia_chi in ['24/24','24/7','24/24h','24/24H']:
-#                             dd_tin_cua_co = True
-#                         elif trich_dia_chi not in ['3/2','30/4','19/5','3/2.','3/2,','23/9']:
-#                             is_day = re.search('\d+/\d\d\d\d', trich_dia_chi)
-#                             if not is_day:
-#                                 if 'm2' not in trich_dia_chi:
-#                                     
-#                                     r.trich_dia_chi = trich_dia_chi
-#                                     break
-#                 if dd_tin_cua_co == False:       
-#                     kss= ['mmg','mqc','mtg', 'bds', 'cần tuyển','tuyển sale', 'tuyển dụng', 'bất động sản','bđs','ký gửi']
-#                     is_match = False
-#                     for ks in kss:
-#                         rs = re.search(ks,html, re.I)
-#                         if rs:
-#                             is_match = True
-#                             break
-#                     if is_match:
-#                         dd_tin_cua_co = True
-#                 r.dd_tin_cua_co = dd_tin_cua_co
     
     def link_show_(self):
         for r in self:
@@ -542,15 +491,12 @@ class bds(models.Model):
             rs = rs.seconds
             if rs < 3000:
                 r.recent_create = True
-#             r.test = rs
-#     test = fields.Char(compute='recent_create_')
     
     def get_quan_(self):
         quans = self.env['bds.quan'].search([])
         rs = list(map(lambda i:(i.name,i.name),quans))
         return rs
-    
-#     spam = fields.Boolean(related='poster_id.spam')
+
     spam = fields.Boolean()
     siteleech_id_selection = fields.Selection('siteleech_id_selection_')
     def siteleech_id_selection_(self):
@@ -648,14 +594,7 @@ class bds(models.Model):
                     break
             if not selection:
                 r.muc_gia = muc_gia_list[-1][0]
-#     @api.depends('html')
-#     def html_show_(self):
-#         for r in self:
-#             
-#             if  r.html and len(r.html) > 201:
-#                 r.html_show = r.html[:200] + '...'
-#             else:
-#                 r.html_show = r.html
+
     rq_zalo_hello = fields.Char(compute='rq_zalo_hello_', store = True)    
     @api.depends('title')
     def rq_zalo_hello_(self):

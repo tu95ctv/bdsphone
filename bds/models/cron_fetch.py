@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from odoo.addons.bds.models.fetch import fetch
+# from odoo.addons.bds.models.fetch import fetch
 
 class CronFetch(models.Model):
     _name = 'cronfetch'

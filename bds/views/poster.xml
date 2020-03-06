@@ -176,6 +176,5 @@
             <field name="act_window_id" ref="bds.poster_action" />
         </record>
         <!-- !POSTER -->
- <menuitem name="Poster" id="poster_menu" parent="bds_icon" action="bds.poster_action"  sequence="2"/>
 </data>
 </odoo>

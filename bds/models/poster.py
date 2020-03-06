@@ -3,7 +3,7 @@
 from odoo import models, fields, api,sql_db
 import datetime
 import re
-from odoo.addons.bds.models.fetch import g_or_c_ss
+from odoo.addons.bds.models.bds_tools import g_or_c_ss
 from odoo.exceptions import UserError
 class Poster(models.Model):
     _name = 'bds.poster'

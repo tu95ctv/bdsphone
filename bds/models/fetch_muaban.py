@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from odoo.addons.bds.models.bds_tools  import  request_html,g_or_c_ss, get_or_create_user_cho_tot_batdongsan,g_or_c_chotot_quan
+from odoo.addons.bds.models.bds_tools  import  request_html, g_or_c_ss, get_or_create_user_cho_tot_batdongsan,g_or_c_chotot_quan
 from bs4 import BeautifulSoup
 import re
 import datetime

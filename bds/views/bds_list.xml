@@ -12,12 +12,15 @@
                     <button name="open_something" type="object"/>
                     <field name="quan_tam"></field>
                     <field name="id"></field>
+                    <field name="gia_trieu"/>
                     <field name="html_show"  string="Htmmmmmmmmmmmmmmllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" readonly="0"/>
                    	<field name="trich_dia_chi" />
+                    <field name="cate"/>
                    	<field name="detail_du_doan_cc_or_mg" />
                    	<field name="ko_quan_tam"/>
                     <field name="spam"/>
-                     <field name="lam_co"></field>
+                    <field name="lam_co"></field>
+                    <field name="count_post_all_site" />
                    <!-- 
                    	<field name="dia_chi_mat_tien" />
                    	<field name="dia_chi_2" />
@@ -78,7 +81,6 @@
         </record>
         
         
-        <menuitem name="BDS" id="bds_menu" parent="not_use_menu" action="bds.action_window" />
         
         
         
@@ -90,7 +92,6 @@
             <field name="view_id" ref="bds.list2"></field>
         </record>
         
-        <menuitem name="BDS Main" id="bds_menu2" parent="bds_icon" action="bds.action_window2"  sequence="1"/>
 	
 	
 	

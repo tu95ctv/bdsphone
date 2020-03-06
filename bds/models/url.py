@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from odoo.addons.bds.models.fetch import g_or_c_ss
+from odoo.addons.bds.models.bds_tools import g_or_c_ss
 import re
 from unidecode import unidecode
 class URL(models.Model):
@@ -33,6 +33,9 @@ class URL(models.Model):
     existing_link_number = fields.Integer()
     link_number = fields.Integer()
     interval = fields.Integer()
+    cate = fields.Selection([('bds','BDS'),('phone','Phone'),('laptop','Laptop')], default='bds')
+    set_number_of_page_once_fetch = fields.Integer(default=5)
+    set_leech_max_page = fields.Integer()
     @api.depends('post_ids')
     def quan_ids_(self):
         for r in self:

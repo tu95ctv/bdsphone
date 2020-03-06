@@ -1,13 +1,9 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api,sql_db
-from . import fetch 
-from odoo.addons.bds.models.fetch import fetch
 from odoo.addons.bds.models.import_contact import import_contact
 import logging
-from odoo.addons.bds.models.fetch import request_html
 _logger = logging.getLogger(__name__)
-# from threading import current_thread
-from odoo.addons.bds.models.fetch import g_or_c_ss
+from odoo.addons.bds.models.bds_tools import g_or_c_ss
 import re
 import datetime
 from odoo.osv import expression

@@ -44,6 +44,7 @@
                 </form>
             </field>
         </record>
+
         <record id="url_list" model="ir.ui.view">
             <field name="name">bds.url</field>
             <field name="model">bds.url</field>
@@ -52,8 +53,9 @@
                     <field name="id" />
                     <field name="url" />
                     <field name="description" />
+                    <field name="cate" />
                     <field name="siteleech_id" />
-                     <field name="existing_link_number" />
+                    <field name="existing_link_number" />
                     <field name="update_link_number" />
                     <field name="create_link_number" />
                     <field name="web_last_page_number" />
@@ -62,11 +64,12 @@
                     <field name="current_page" />
                     <field name="current_page_for_first" />
                     <field name="link_number" />
-                   
                     <field name="interval" />
                 </tree>
             </field>
         </record>
+
+        
         <record model="ir.actions.act_window" id="url_action">
             <field name="name">quan action</field>
             <field name="res_model">bds.url</field>
