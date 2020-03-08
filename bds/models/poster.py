@@ -8,7 +8,6 @@ from odoo.exceptions import UserError
 class Poster(models.Model):
     _name = 'bds.poster'
     _order = 'count_post_all_site desc'
-    getphoneposter_ids = fields.Many2many('bds.getphoneposter','getphone_poster_relate','poster_id','getphone_id')
     phone = fields.Char()
     login = fields.Char()
     username = fields.Char(compute = 'username_')
@@ -20,7 +19,6 @@ class Poster(models.Model):
             r.name = r.phone
     poster_type = fields.Selection([('chinh_chu', 'chinh_chu'), ('dau_tu', 'dau_tu'), ('moi_gioi', 'moi_gioi')])
     contact_address = fields.Char()
-    sms_ids = fields.Many2many('bds.sms','sms_poster_relate','poster_id','sms_id')
     post_ids = fields.One2many('bds.bds','poster_id')
     mycontact_id = fields.Many2one('bds.mycontact',compute='mycontact_id_',store=True)
     cong_ty = fields.Char()
@@ -59,7 +57,6 @@ class Poster(models.Model):
     da_goi_dien_hay_chua = fields.Selection([(u'Chưa gọi điện',u'Chưa gọi điện'),(u'Đã liên lạc',u'Đã liên lạc'),(u'Không bắt máy',u'Không đổ chuông')],
                                             default = u'Chưa gọi điện')
     is_recent = fields.Boolean(compute=  'is_recent_')
-    exclude_sms_ids = fields.Many2many('bds.sms','poster_sms_relate','poster_id','sms_id')
     log_text = fields.Char()
     spam = fields.Boolean()
     
@@ -191,28 +188,14 @@ class Poster(models.Model):
         product_category = self.env.cr.dictfetchall()
         raise UserError('%s'%product_category)
         
-        
-#         first = self.env['bds.quanofposter'].search([('poster_id','=',self.id), ('siteleech_id','=',False)], order = 'quantity desc', limit =1)
-#         for r in self:
-#             qops = self.env['bds.quanofposter'].search([('poster_id','=',r.id), ('siteleech_id','!=',False)], order = 'quantity desc')
-#             
-#             alist = map(lambda i:u'%s-%s-%s'%(i.siteleech_id.name_viet_tat, i.quan_id.name_viet_tat,i.quantity), qops)
-#             rs = u','.join(alist)
-#             raise UserError(rs)
-#             trang_thai_lien_lac = r.post_ids.mapped('trang_thai_lien_lac')
-#             trang_thai_lien_lac = map(lambda i: int(i), trang_thai_lien_lac)
-#             trang_thai_lien_lac = max(trang_thai_lien_lac)
-#             raise UserError(trang_thai_lien_lac)
     @api.multi
     def trig(self):
         self.trigger4 = True
     @api.depends('post_ids', 'trigger', 'post_ids.trich_dia_chi',  'post_ids.dd_tin_cua_dau_tu', 'post_ids.dd_tin_cua_co')
     def count_post_of_poster_(self):
-#         return True
         for r in self:
             print ('count_post_of_poster_ r.id+++',r.id)
             count_chotot_post_of_poster = self.env['bds.bds'].search_count([('poster_id','=',r.id),('siteleech_id.name','=', 'chotot')])
-#             count_chotot_post_of_poster = len(count_chotot_post_of_poster)
             r.count_chotot_post_of_poster = count_chotot_post_of_poster
             
             count_bds_post_of_poster = self.env['bds.bds'].search_count([('poster_id','=',r.id),('link','like','batdongsan')])
@@ -285,13 +268,7 @@ class Poster(models.Model):
                         else:
                             detail_du_doan_cc_or_mg = 'dd_mg_b_chinh_chu_n_cpas_lte_3_n_address_rate_eq_0' 
                             
-                    
-                    
-#                     if count_post_all_site > 3 and address_rate ==0:
-#                         detail_du_doan_cc_or_mg = 'dd_mg_b_chinh_chu_n_cpas_gt_3_n_address_rate_eq_0'
-#                         du_doan_cc_or_mg= 'dd_mg'
-#                     elif count_post_all_site <= 3:
-                        
+
                 else:#khong_biet
                     if count_post_all_site  > 3:
                         if address_rate >= 0.3:
@@ -314,14 +291,15 @@ class Poster(models.Model):
                     
                     
             r.du_doan_cc_or_mg = du_doan_cc_or_mg
-            r.detail_du_doan_cc_or_mg = detail_du_doan_cc_or_mg        
+            r.detail_du_doan_cc_or_mg = detail_du_doan_cc_or_mg     
+
+
+    
     @api.depends('post_ids','post_ids.gia','trigger4')
     def quanofposter_ids_(self):
-#         return True
         for r in self:
             print ('quanofposter_ids_**** r.id',r.id)
             if r.id:
-#                 print ('ahahah',r.id)
                 quanofposter_ids_lists= []
                 product_category_query_siteleech =\
                  '''select count(quan_id),quan_id, min(gia), avg(gia), max(gia), siteleech_id from bds_bds where poster_id = %s  and gia > 0 group by quan_id,siteleech_id'''%r.id
@@ -353,16 +331,18 @@ class Poster(models.Model):
                             quan_id = int(tuple_count_quan[1])
                             siteleech_id = int(tuple_count_quan[5])
                             
-                        quanofposter = g_or_c_ss(self,'bds.quanofposter', {'quan_id':quan_id,
-                                                                     
-                                                                     'poster_id':r.id, 'siteleech_id':siteleech_id }, {'quantity':tuple_count_quan[0],
-                                                                                        'min_price':tuple_count_quan[2-offset],
-                                                                                        'avg_price':tuple_count_quan[3-offset],
-                                                                                        'max_price':tuple_count_quan[4-offset],
-                                                                                        
-                                                                                        
-                                                                                         }, True)
-                        quanofposter_ids_lists.append(quanofposter.id)#why????
+                        quanofposter = g_or_c_ss(self,'bds.quanofposter', 
+                            {'quan_id':quan_id,
+                            'poster_id':r.id,
+                            'siteleech_id':siteleech_id 
+                            }, {'quantity':tuple_count_quan[0],
+                                'min_price':tuple_count_quan[2-offset],
+                                'avg_price':tuple_count_quan[3-offset],
+                                'max_price':tuple_count_quan[4-offset],
+                                }, True)
+
+                        quanofposter_ids_lists.append(quanofposter[0].id)
+                        
                         if siteleech_id ==False:
                             r.min_price = tuple_count_quan[2-offset]
                             r.avg_price = tuple_count_quan[3-offset]
@@ -417,6 +397,7 @@ class Poster(models.Model):
     @api.depends('post_ids','post_ids.gia')
     def quanofposter_ids_tanbinh(self):
         self.quanofposter_ids_common(u'Tân Bình')
+
     def quanofposter_ids_common(self,quan_name):
         for r in self:
             if r.id:

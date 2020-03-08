@@ -117,8 +117,6 @@
         
         
          
-         <menuitem name="Site Leech" id="siteleech_menu" parent="stuff_menu" action="siteleech_action" />
-        <menuitem name="urlbds" id="url_menu" parent="stuff_menu" action="url_action" />
         <!-- !URL -->
 </data>
 </odoo>

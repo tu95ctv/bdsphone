@@ -38,7 +38,6 @@
             <field name="res_model">bds.quan</field>
             <field name="view_mode">tree,form</field>
         </record>
-        <menuitem name="Quận" id="quan_menu" parent="stuff_menu" action="quan_action" />
         <!-- !QUAN -->
 	</data>
 </odoo>

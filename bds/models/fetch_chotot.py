@@ -56,23 +56,12 @@ def get_topic_chotot(self,update_dict, topic_html, siteleech_id, only_return_pri
             val = val.strip()
             if val:
                 return g_or_c_ss(self,'bds.images',{'url':val})
-            
+
     html = topic_html['ad']
-    self.test_html = html
-    
-    
     date = html['date']
-#     native_dt = convert_chotot_date_to_datetime(date)
-#     update_dict['public_datetime'] = native_dt
-    
-    self.test_url = date
-
-
-
     price, price_trieu = convert_chotot_price(html)
     update_dict['date_text'] = date
     update_dict['siteleech_id'] = siteleech_id.id
-    
     if only_return_price:
         return price
     images = html.get('images',[])
@@ -80,7 +69,6 @@ def get_topic_chotot(self,update_dict, topic_html, siteleech_id, only_return_pri
         update_dict['present_image_link'] = images[0]  
         object_m2m_list = list(map(create_or_get_one_in_m2m_value, images))
         m2m_ids = list(map(lambda x:x.id, object_m2m_list))
-        ###print '**m2m_ids**',m2m_ids
         if m2m_ids:
             val = [(6, False, m2m_ids)]
             update_dict['images_ids'] = val
@@ -124,30 +112,5 @@ def get_mobile_name_cho_tot(html):
     return mobile,name
 
 
-# def get_date_cho_tot_old(string):  
-#     try:
-#         ###print 'ngay dang from cho tot',string
-#         if u'hôm nay' in string:
-#             new = string.replace(u'hôm nay',datetime.date.today().strftime('%d/%m/%Y'))
-#         elif u'hôm qua' in string:
-#             hom_qua_date = datetime.date.today() -  datetime.timedelta(days=1)
-#             new = string.replace(u'hôm qua',hom_qua_date.strftime('%d/%m/%Y'))
-#         else:
-#             new=string.replace(u'ngày ','').replace(u' tháng ','/').replace(' ','/2017 ')
-#         new_date =  datetime.datetime.strptime(new,'%d/%m/%Y %H:%M')     
-#         return local_a_native_time(new_date)
-#     except:
-#         return False
-# 
-# 
-# 
-# def get_date_cho_tot(string):  
-#     dt = convert_chotot_date_to_datetime(string)
-#     return local_a_native_time(dt)
 
-
-
-
-
-################# cho tot  ##################
 

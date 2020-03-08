@@ -44,77 +44,7 @@
         
        
        
-        <!-- GET PHONE POSTER -->
-        
-        <record id="getphoneposter_form" model="ir.ui.view">
-            <field name="name">get phone poster form</field>
-            <field name="model">bds.getphoneposter</field>
-            <field name="arch" type="xml">
-                <form>
-                <sheet>
-                    <group>
-                        <group>
-                        <group>
-                            <field name="name" />
-                            <field name="description" />
-                            <field name="is_repost_for_poster" />
-                          	<field name="filter_sms_or_filter_sql" /> 
-                            <field name="sms_id" />
-                            <field name="nha_mang" />
-                            </group>
-                            <group>
-                            <field name="post_count_min" />
-                            <field name="loc_gian_tiep_quan_bds_topic" />
-                            <field name="gia_be_hon"  />
-                            <field name="gia_lon_hon"  />
-                            </group>
-                            <group>
-                            <field name="quan_ids" >
-                             
-                           	<tree>
-                           		<field name="name"></field>
-                           	</tree>
-                           </field>
-                          </group>
-                        </group>
-                        <group>
-                           
-                            <field name="len_poster" />
-                            <field name="phone_list" />
-                        </group>
-                    </group>
-                    <notebook>
-                    <page string = "m2m">
-                  <group>
-                    <!--   <field name="phuong_loc_ids" /> -->  
-                        <field name="exclude_poster_ids" />
-                        <field name="poster_da_gui_cua_sms_nay_ids" />
-                        <field name="poster_ids" />
-                        <field name="bds_ids" />
-                        </group>
-                        </page>
-                        </notebook>
-                	</sheet>
-                </form>
-            </field>
-        </record>
-        <record id="getphoneposter_tree" model="ir.ui.view">
-            <field name="name">get phone poster form</field>
-            <field name="model">bds.getphoneposter</field>
-            <field name="arch" type="xml">
-                <tree>
-                 <field name="name" />
-                  <field name="description" />
-                </tree>
-                </field>
-                </record>
-                
-        <record model="ir.actions.act_window" id="getphoneposter_action">
-            <field name="name">get phone</field>
-            <field name="res_model">bds.getphoneposter</field>
-            <field name="view_mode">tree,form</field>
-        </record>
-        <!-- !GET PHONE POSTER -->
+       
         <!-- LUONG -->
         <record id="luong_tree" model="ir.ui.view">
             <field name="name">luong</field>
@@ -128,27 +58,7 @@
             </field>
         </record>
         <!-- !LUONG -->
-        <!-- SMS  -->
-        <record id="sms_form" model="ir.ui.view">
-            <field name="name">sms</field>
-            <field name="model">bds.sms</field>
-            <field name="priority" eval="1" />
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <field name="name" />
-                            <field name="noi_dung" />
-                            <field name="getphoneposter_ids" />
-                            <field name="len_poster_ids" />
-                            <field name="poster_ids" />
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
-        <!-- !SMS   -->
-       
+     
         
         
         

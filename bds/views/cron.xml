@@ -55,7 +55,6 @@
         <!-- end cronfetch -->
         
         
-		<menuitem name="Cron Fetch" id="cron_fetch_menu" parent="bds_icon" action="cronfetch_action"  sequence="5"/>
 
 
 

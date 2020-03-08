@@ -54,10 +54,8 @@
             <field name="model">bds.bdsview3</field>
             <field name="arch" type="xml">
                 <search>
-                	                     <filter name="cpas" string="cpas be hon 1" domain="[('cpas','&lt;=',1)]" />
-                	                     <filter name="full_count" string="full_count be hon 1" domain="[('full_count','&lt;=',1)]" />
-                	                     
-                	
+                    <filter name="cpas" string="cpas be hon 1" domain="[('cpas','&lt;=',1)]" />
+                    <filter name="full_count" string="full_count be hon 1" domain="[('full_count','&lt;=',1)]" />
                 </search>
             </field>
         </record>

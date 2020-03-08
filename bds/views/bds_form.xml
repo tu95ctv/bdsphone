@@ -124,7 +124,7 @@
         </record>
         
         
-        <record model="ir.ui.view" id="bds.list">
+        <!-- <record model="ir.ui.view" id="bds.list">
             <field name="name">bds list</field>
             <field name="model">bds.bds</field>
             <field name="arch" type="xml">
@@ -135,8 +135,6 @@
                     <field name="title" />
                     <field name="quan_tam"></field>
                     <field name="comment"></field>
-                    <!--<field name="thumb_view"  />
-             <field name="present_image_link_show" widget="image" height="50" />   -->
                     <field name="gia" />
                     <field name="gia_trieu" />
                     <field name="area" />
@@ -152,7 +150,6 @@
                     <field name="recent_create"  />
                      <field name="again_update_date" />
                     <field name="html" />
-                    <!-- <field name="thumb" widget="image" height="60" /> -->
                      <field name="ko_quan_tam" />
                      <field name="comment" />
                      <field name="don_gia" />
@@ -169,7 +166,7 @@
                 </tree>
             </field>
         </record>
-        
+         -->
         
         
     

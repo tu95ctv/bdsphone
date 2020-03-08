@@ -44,6 +44,10 @@
         'views/tproduct_detail.xml',
         'views/tproducts.xml',
         'views/url.xml',
+        'views/laptop.xml',
+        
+        'views/get_phone_poster.xml',
+
         'views/menu.xml',
 
         

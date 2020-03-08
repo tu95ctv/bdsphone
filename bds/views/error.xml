@@ -34,7 +34,6 @@
             <field name="view_mode">tree,form</field>
         </record>
         
-        <menuitem name="Error" id="error_menu1" parent="stuff_menu" action="bds.error_action" />
         <!-- error -->
 	</data>
 </odoo>

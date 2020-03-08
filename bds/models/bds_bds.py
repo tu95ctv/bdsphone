@@ -129,47 +129,6 @@ class bds(models.Model):
     count_chotot_post_of_poster = fields.Integer(related= 'poster_id.count_chotot_post_of_poster',store=True,string=u'chotot post quantity')
     count_bds_post_of_poster = fields.Integer(related= 'poster_id.count_bds_post_of_poster',store=True,string=u'bds post quantity')
     count_post_all_site = fields.Integer(related= 'poster_id.count_post_all_site',store=True)
-    post_ids_of_user  = fields.One2many('bds.bds','poster_id',related='poster_id.post_ids')
-    
-    
-    # related
-    
-#     username = fields.Char()
-#     
-#     
-# 
-#     post_ids_of_user = fields.Many2many('bds.bds','bds_bds_rel','bds_id','bds_id_here')
-#     du_doan_cc_or_mg = fields.Selection([('dd_mg','dd_mg'),('dd_dt','dd_dt'), ('dd_cc','dd_cc'), ('dd_kb', 'dd_kb')])
-#     detail_du_doan_cc_or_mg = fields.Selection(
-#                                                   [('dd_cc_b_moi_gioi_n_address_rate_gt_0_5','dd_cc_b_moi_gioi_n_address_rate_gt_0_5'),
-#                                                    ('dd_mg_b_moi_gioi_n_address_rate_lte_0_5','dd_mg_b_moi_gioi_n_address_rate_lte_0_5'), 
-#                                                    ('dd_cc_b_kw_co_n_address_rate_gt_0_5', 'dd_cc_b_kw_co_n_address_rate_gt_0_5'),
-#                                                    ('dd_mg_b_kw_co_n_address_rate_lte_1','dd_mg_b_kw_co_n_address_rate_lte_1'),
-#                                                    ('dd_cc_b_chinh_chu_n_cpas_lte_3','dd_cc_b_chinh_chu_n_cpas_lte_3'),
-#                                                   
-#                                                    
-#                                                    ('dd_cc_b_chinh_chu_n_cpas_gt_3_n_address_rate_gt_0', 'dd_cc_b_chinh_chu_n_cpas_gt_3_n_address_rate_gt_0'),
-#                                                    ('dd_mg_b_chinh_chu_n_cpas_gt_3_n_address_rate_eq_0', 'dd_mg_b_chinh_chu_n_cpas_gt_3_n_address_rate_eq_0'),
-#                                                    ('dd_cc_b_chinh_chu_n_cpas_lte_3_n_address_rate_gt_0', 'dd_cc_b_chinh_chu_n_cpas_lte_3_n_address_rate_gt_0'),
-#                                                    ('dd_mg_b_chinh_chu_n_cpas_lte_3_n_address_rate_eq_0', 'dd_mg_b_chinh_chu_n_cpas_lte_3_n_address_rate_eq_0'),
-# 
-#                                                    
-#                                                    ('dd_cc_b_khong_biet_n_cpas_gt_3_n_address_rate_gte_0_3','dd_cc_b_khong_biet_n_cpas_gt_3_n_address_rate_gte_0_3'),
-#                                                    ('dd_cc_b_khong_biet_n_cpas_lte_3_n_address_rate_gt_0','dd_cc_b_khong_biet_n_cpas_lte_3_n_address_rate_gt_0'),
-#                                                    ('dd_mg_b_khong_biet_n_cpas_gt_3_n_address_rate_lt_0_3','dd_mg_b_khong_biet_n_cpas_gt_3_n_address_rate_lt_0_3'),
-#                                                    ('dd_kb','dd_kb')
-#                                                    ])
-#     
-#     
-#     ket_luan_cc_or_mg = fields.Selection([('dd_mg','dd_mg'),('dd_dt','dd_dt'), ('dd_cc','dd_cc'), ('dd_kb', 'dd_kb')])
-#     max_trang_thai_lien_lac = fields.Selection([(u'1',u'request zalo'),(u'2',u'added zalo'),
-#                                             (u'3',u'Đã gửi sổ'),(u'4',u'Đã xem nhà'),(u'5',u'Đã Dẫn khách'),
-#                                             (u'6',u'Không có zalo')])    
-#     
-#     count_chotot_post_of_poster = fields.Integer()
-#     count_bds_post_of_poster = fields.Integer()
-#     count_post_all_site = fields.Integer()
-    
     
     
     html = fields.Html()
@@ -225,9 +184,6 @@ class bds(models.Model):
     cho_tot_link_fake = fields.Char(compute='cho_tot_link_fake_')
     public_datetime = fields.Datetime()
     first_public_datetime = fields.Datetime()
-   
-
-    
     
     data = fields.Text()
     url_ids = fields.Many2many('bds.url','url_post_relate','post_id','url_id')
@@ -242,6 +198,7 @@ class bds(models.Model):
     begin_gia = fields.Float()
     dia_chi_mat_tien = fields.Char()
     dia_chi_2 = fields.Char()
+    
     # mới thêm vào ngày 23/02
     cate = fields.Selection([('bds','BDS'),('phone','Phone'),('laptop','Laptop')])
     def test(self):

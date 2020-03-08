@@ -3,6 +3,7 @@
 		<record id="bds_search" model="ir.ui.view">
             <field name="name">sale.order.list.select</field>
             <field name="model">bds.bds</field>
+            <field name="priority">5</field>
             <field name="arch" type="xml">
                 <search string="bds search">
                 
@@ -27,15 +28,6 @@
                     <field name= "trich_dia_chi" />
                     <field name= "url_id" />
                     <field name= "cate" />
-                    <!-- 
-                    <field  name="ti_le_don_gia" string="ti_le_don_gia_be_hon"  filter_domain="[('ti_le_don_gia','&lt;',self)]"/>
-                      <field  name="ti_le_don_gia" string="ti_le_don_gia_lon_hon"  filter_domain="[('ti_le_don_gia', '&gt;',self)]"/>
-                    <field name="muc_ti_le_don_gia" />
-                    <field name= "muc_don_gia" />
-                    <field name="public_datetime" />
-                    <filter  name="not_p_15_tan_binh" string="Not phuong 15"  domain="[('quan_id.name', 'ilike', 'Tân Bình'),('html','not ilike','phạm văn bạch'),('html','not ilike','phạm văn bạch'),('html','not ilike','phường 15')]"/>
-                     -->
-                    <!-- <field name="quan_id" filter_domain="[('quan_id','=',self)]"/> -->
                     <field name="quan_id_selection" filter_domain="[('quan_id','=',self)]"/>
                     <field name="siteleech_id_selection" filter_domain="[('siteleech_id','=',self)]"/>
                     <field  name="greater_day" string="số ngày đăng bé hơn"  filter_domain="[ ('public_datetime','&gt;=', ((context_today()-datetime.timedelta(days=self)).strftime('%Y-%m-%d'))) ]"/>
